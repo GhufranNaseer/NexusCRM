@@ -159,3 +159,53 @@ export default function Pipeline() {
                             <p className="text-[10px] text-slate-500 truncate">{lead.company}</p>
                           </div>
                         </div>
+                        
+                        {/* Quick Status Select Button (Dropdown UI) */}
+                        <div className="relative">
+                          <button
+                            onClick={() => setActiveSelectCard(activeSelectCard === lead.id ? null : lead.id)}
+                            className="p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-white"
+                          >
+                            <MoreVertical className="w-3.5 h-3.5" />
+                          </button>
+                          
+                          {activeSelectCard === lead.id && (
+                            <>
+                              <div className="fixed inset-0 z-20" onClick={() => setActiveSelectCard(null)} />
+                              <div className="absolute right-0 mt-1 w-36 bg-slate-950 border border-slate-800 rounded-lg shadow-xl py-1 z-30">
+                                {STAGES.map((s) => (
+                                  <button
+                                    key={s}
+                                    onClick={() => {
+                                      moveLead(lead.id, s);
+                                      setActiveSelectCard(null);
+                                    }}
+                                    className={`w-full text-left px-3 py-1.5 text-[10px] font-semibold ${
+                                      lead.status === s ? 'text-indigo-400 bg-slate-900' : 'text-slate-400 hover:bg-slate-900 hover:text-white'
+                                    }`}
+                                  >
+                                    Move to {s}
+                                  </button>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Deal Value & Priority Badge */}
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-white">${lead.value.toLocaleString()}</span>
+                        <span
+                          className={`text-[8px] px-2 py-0.5 rounded font-bold border uppercase tracking-wider ${
+                            lead.priority === 'High'
+                              ? 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                              : lead.priority === 'Medium'
+                              ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                              : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
+                          }`}
+                        >
+                          {lead.priority}
+                        </span>
+                      </div>
+
