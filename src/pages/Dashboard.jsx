@@ -59,3 +59,73 @@ export default function Dashboard() {
       name: newLeadName,
       company: newLeadCompany,
       contactName: newLeadName.split(' ')[0] || 'Contact',
+      email: `${newLeadName.toLowerCase().replace(/ /g, '')}@${newLeadCompany.toLowerCase().replace(/ /g, '')}.com`,
+      phone: '+92 300 0000000',
+      value: parseFloat(newLeadVal) || 5000,
+      priority: newLeadPriority,
+      source: newLeadSource,
+      status: 'New Lead'
+    });
+
+    setNewLeadName('');
+    setNewLeadCompany('');
+    setNewLeadVal('');
+    setShowAddLead(false);
+  };
+
+  const getActIcon = (type) => {
+    switch (type) {
+      case 'Call': return <Phone className="w-3.5 h-3.5 text-blue-400" />;
+      case 'Email': return <Mail className="w-3.5 h-3.5 text-indigo-400" />;
+      case 'Meeting': return <Calendar className="w-3.5 h-3.5 text-emerald-400" />;
+      case 'Won': return <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />;
+      case 'Lost': return <TrendingDown className="w-3.5 h-3.5 text-rose-400" />;
+      default: return <FileText className="w-3.5 h-3.5 text-amber-400" />;
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      
+      {/* Dashboard Welcome Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-white">Dashboard Overview</h2>
+          <p className="text-slate-400 text-xs mt-0.5">Real-time analytical summary of your sales and pipeline actions.</p>
+        </div>
+        <button
+          onClick={() => setShowAddLead(true)}
+          className="flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 shadow-md shadow-indigo-600/20 text-white transition-all self-start sm:self-auto"
+        >
+          <Plus className="w-4 h-4" />
+          <span>Add New Lead</span>
+        </button>
+      </div>
+
+      {/* 4 KPI Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        {/* KPI 1: Leads */}
+        <div className="glass-card glass-card-hover glow-indigo p-5 flex flex-col relative overflow-hidden">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-medium text-slate-400">Total Leads</span>
+            <div className="p-2 bg-indigo-500/10 rounded-lg border border-indigo-500/20 text-indigo-400">
+              <Activity className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-2xl font-bold text-white">{totalLeadsCount}</span>
+            <span className="text-[10px] font-semibold text-emerald-400 flex items-center bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10">
+              +14%
+            </span>
+          </div>
+          <span className="text-[10px] text-slate-500 font-medium mb-3">Target: 30 active deals</span>
+          <div className="h-10 w-full mt-auto">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={sparklineDataLeads}>
+                <Area type="monotone" dataKey="v" stroke="#6366f1" strokeWidth={1.5} fill="rgba(99, 102, 241, 0.05)" dot={false} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
