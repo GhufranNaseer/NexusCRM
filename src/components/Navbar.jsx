@@ -54,3 +54,38 @@ export default function Navbar({ onOpenSidebar }) {
         {/* Role Selector Badge */}
         <div className="relative">
           <button
+            onClick={() => setShowRoles(!showRoles)}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800/50 hover:bg-slate-800 text-slate-300 border border-slate-700/30"
+          >
+            <Shield className="w-3.5 h-3.5 text-indigo-400" />
+            <span>{settings.activeRole}</span>
+          </button>
+          
+          {showRoles && (
+            <>
+              <div className="fixed inset-0 z-10" onClick={() => setShowRoles(false)} />
+              <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-800 rounded-lg shadow-xl py-1 z-20">
+                {['Admin / Owner', 'Sales Manager', 'Support Team', 'Marketing Team'].map((role) => (
+                  <button
+                    key={role}
+                    onClick={() => handleRoleChange(role)}
+                    className={`w-full text-left px-4 py-2 text-xs font-medium ${
+                      settings.activeRole === role
+                        ? 'bg-indigo-600/10 text-indigo-400'
+                        : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    }`}
+                  >
+                    {role}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Theme Toggler */}
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors"
+          title="Toggle Light/Dark Theme"
+        >
