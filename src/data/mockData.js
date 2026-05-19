@@ -151,3 +151,53 @@ export const initialActivities = [
     type: "Call",
     title: "Introductory Phone Call",
     description: "Successfully introduced NexusCRM capabilities to Zainab Malik from Quantum Tech.",
+    date: "2026-05-20 10:15",
+    refName: "Quantum Tech"
+  },
+  {
+    id: "act-2",
+    type: "Email",
+    title: "Proposal Pitch Sent",
+    description: "Sent commercial proposal PDF containing standard Tier-2 licensing pricing.",
+    date: "2026-05-19 14:45",
+    refName: "Quantum Tech"
+  },
+  {
+    id: "act-3",
+    type: "Meeting",
+    title: "Onboarding Session",
+    description: "Conducted virtual zoom workshop for Sara Khan's Tech Solutions crew.",
+    date: "2026-05-18 11:00",
+    refName: "Sara Khan"
+  },
+  {
+    id: "act-4",
+    type: "Note",
+    title: "Profile Note Addition",
+    description: "Logged priority notification regarding upcoming June 15 renewal details.",
+    date: "2026-05-18 16:45",
+    refName: "Dr. Fatima Jamil"
+  },
+  {
+    id: "act-5",
+    type: "Call",
+    title: "Cold Call Outreach",
+    description: "Connected with Kamran Awan regarding Referral setup. Lead moved to Contacted.",
+    date: "2026-05-15 15:30",
+    refName: "Awan Logistics"
+  }
+];
+
+export const initialTasks = [
+  {
+    id: "task-1",
+    title: "Draft Proposal for Ali Enterprises",
+    description: "Draft technical specs and pricing sheets matching Ali Enterprises requested details.",
+    priority: "High",
+    dueDate: "2026-05-22",
+    assigneeName: "Kamran Shah",
+    assigneeAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Kamran&backgroundColor=6366f1",
+    status: "Pending"
+  },
+  {
+    id: "task-2",
