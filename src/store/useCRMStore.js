@@ -29,3 +29,63 @@ export const useCRMStore = create((set, get) => ({
     
     set((state) => {
       const updatedLeads = state.leads.map((l) => {
+        if (l.id === leadId) {
+          updatedLead = { ...l, status: newStatus };
+          return updatedLead;
+        }
+        return l;
+      });
+
+      // Log activity
+      const activityId = `act-auto-${Date.now()}`;
+      const newActivity = {
+        id: activityId,
+        type: newStatus === 'Won' ? 'Won' : newStatus === 'Lost' ? 'Lost' : 'StageChange',
+        title: `Pipeline Stage Updated`,
+        description: `Lead "${updatedLead?.name}" moved to stage "${newStatus}".`,
+        date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+        refName: updatedLead?.name || 'Lead'
+      };
+
+      let updatedCustomers = [...state.customers];
+
+      // If Won, auto-convert or update customer account
+      if (newStatus === 'Won' && updatedLead) {
+        const customerExists = state.customers.find(
+          (c) => c.company.toLowerCase() === updatedLead.company.toLowerCase() || c.name.toLowerCase() === updatedLead.contactName.toLowerCase()
+        );
+
+        if (!customerExists) {
+          const newCustId = `cust-auto-${Date.now()}`;
+          const newCustomer = {
+            id: newCustId,
+            name: updatedLead.contactName,
+            email: updatedLead.email,
+            phone: updatedLead.phone,
+            company: updatedLead.company,
+            avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${updatedLead.contactName}&backgroundColor=3b82f6`,
+            status: 'Active',
+            totalValue: updatedLead.value,
+            dealsCount: 1,
+            notes: [
+              {
+                id: `note-auto-${Date.now()}`,
+                content: `Automatically converted from Lead "${updatedLead.name}" upon pipeline success.`,
+                date: new Date().toISOString().replace('T', ' ').substring(0, 16)
+              }
+            ]
+          };
+          updatedCustomers.push(newCustomer);
+        } else {
+          updatedCustomers = state.customers.map((c) => {
+            if (c.id === customerExists.id) {
+              return {
+                ...c,
+                totalValue: c.totalValue + updatedLead.value,
+                dealsCount: c.dealsCount + 1,
+                status: 'Active'
+              };
+            }
+            return c;
+          });
+        }
