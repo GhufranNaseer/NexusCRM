@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useCRMStore } from '../store/useCRMStore';
 import { BarChart3, TrendingUp, PieChart, Target, Sparkles, Award } from 'lucide-react';
 import {
@@ -109,3 +109,103 @@ export default function Analytics() {
             <Award className="w-4 h-4 text-indigo-400" />
           </div>
 
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={teamChartData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
+                <XAxis dataKey="name" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} />
+                <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} />
+                <Tooltip
+                  cursor={{ fill: 'rgba(255, 255, 255, 0.03)' }}
+                  contentStyle={{
+                    backgroundColor: '#0f172a',
+                    borderColor: 'rgba(255,255,255,0.08)',
+                    borderRadius: '8px',
+                    color: '#f8fafc',
+                    fontSize: '11px'
+                  }}
+                />
+                <Bar dataKey="revenue" fill="#4f46e5" radius={[4, 4, 0, 0]} fillOpacity={0.85} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Chart 3: Lead sources Pie */}
+        <div className="glass-card p-5 space-y-4">
+          <div className="flex justify-between items-center text-xs">
+            <div>
+              <h3 className="text-sm font-bold text-white">Acquisition Channels</h3>
+              <p className="text-slate-500 text-[11px] mt-0.5">Distribution of lead sources.</p>
+            </div>
+            <PieChart className="w-4 h-4 text-sky-400" />
+          </div>
+
+          <div className="h-64 w-full flex items-center justify-center">
+            <ResponsiveContainer width="100%" height="100%">
+              <RechartsPieChart>
+                <Pie
+                  data={sourceChartData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {sourceChartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#0f172a',
+                    borderColor: 'rgba(255,255,255,0.08)',
+                    borderRadius: '8px',
+                    color: '#f8fafc',
+                    fontSize: '11px'
+                  }}
+                />
+                <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ fontSize: '10px', color: '#64748b' }} />
+              </RechartsPieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Chart 4: Funnel insights card */}
+        <div className="glass-card p-6 flex flex-col justify-between space-y-6">
+          <div className="space-y-2">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <Target className="w-4 h-4 text-rose-400" />
+              <span>Workspace Insights & Goals</span>
+            </h3>
+            <p className="text-slate-400 text-xs leading-relaxed">
+              Your overall conversion rate is doing excellent at <span className="text-emerald-400 font-bold">57%</span>. Lead flow has increased by <span className="text-indigo-400 font-bold">14%</span> compared to last month's averages.
+            </p>
+          </div>
+
+          <div className="space-y-4 text-xs divide-y divide-slate-850">
+            <div className="flex justify-between items-center py-2">
+              <span className="text-slate-500 font-semibold">Suggested Goal</span>
+              <span className="text-slate-350">Scale Outreach outbound budget by 10%</span>
+            </div>
+            <div className="flex justify-between items-center pt-3 py-2">
+              <span className="text-slate-500 font-semibold">Acquisition Star</span>
+              <span className="text-emerald-400 font-bold">Organic Website (Website Source)</span>
+            </div>
+            <div className="flex justify-between items-center pt-3 py-2">
+              <span className="text-slate-500 font-semibold">Billing status</span>
+              <span className="text-indigo-400 font-bold">All client invoices accounted</span>
+            </div>
+          </div>
+
+          <div className="p-3 bg-slate-950/40 border border-slate-850 rounded-lg flex items-center gap-2.5 text-[11px] text-slate-400 leading-normal">
+            <Sparkles className="w-4 h-4 text-indigo-400 flex-shrink-0 animate-pulse" />
+            <span>AI recommendation: Contacted leads Zainab Malik (Quantum Tech) is warm, proposal pitch done. Draft contract renewal checklist.</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
