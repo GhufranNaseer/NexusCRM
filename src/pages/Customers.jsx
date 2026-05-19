@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCRMStore } from '../store/useCRMStore';
 import { Search, UserPlus, Mail, Phone, Building, ArrowRight } from 'lucide-react';
@@ -114,3 +114,53 @@ export default function Customers() {
                         <span className="text-[10px] text-slate-500">{cust.phone}</span>
                       </div>
                     </td>
+
+                    {/* LTV */}
+                    <td className="px-6 py-4">
+                      <span className="font-bold text-white">${cust.totalValue.toLocaleString()}</span>
+                    </td>
+
+                    {/* Deals Closed */}
+                    <td className="px-6 py-4">
+                      <span className="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[10px] font-bold">
+                        {cust.dealsCount} deals
+                      </span>
+                    </td>
+
+                    {/* Status Badge */}
+                    <td className="px-6 py-4">
+                      <span
+                        className={`text-[8px] px-2 py-0.5 rounded font-bold border uppercase tracking-wider ${
+                          cust.status === 'Active'
+                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                            : 'bg-slate-500/10 text-slate-400 border-slate-500/20'
+                        }`}
+                      >
+                        {cust.status}
+                      </span>
+                    </td>
+
+                    {/* Actions */}
+                    <td className="px-6 py-4 text-right">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/customers/${cust.id}`);
+                        }}
+                        className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white"
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </td>
+
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  );
+}
