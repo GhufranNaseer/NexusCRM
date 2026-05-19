@@ -99,3 +99,63 @@ export default function Pipeline() {
           className="flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 shadow-md shadow-indigo-600/20 text-white transition-all self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
+          <span>New Lead</span>
+        </button>
+      </div>
+
+      {/* Kanban Board Container */}
+      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin">
+        {STAGES.map((stage) => {
+          const stageLeads = leads.filter((l) => l.status === stage);
+          const stageValue = stageLeads.reduce((sum, l) => sum + l.value, 0);
+          const styles = STAGE_STYLES[stage];
+
+          return (
+            <div
+              key={stage}
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, stage)}
+              className={`flex-shrink-0 w-80 rounded-xl bg-slate-900/40 border border-slate-800/80 p-4 flex flex-col max-h-[70vh] border-t-2 ${styles.border}`}
+            >
+              {/* Column Header */}
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider">{stage}</h3>
+                  <span className="text-[10px] text-slate-500 font-semibold">{stageLeads.length} leads â€¢ ${stageValue.toLocaleString()}</span>
+                </div>
+                <div className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${styles.badge}`}>
+                  {stageLeads.length}
+                </div>
+              </div>
+
+              {/* Cards Wrapper */}
+              <div className="flex-1 overflow-y-auto space-y-3.5 pr-1 min-h-[300px]">
+                {stageLeads.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-10 border border-dashed border-slate-800 rounded-lg text-slate-600 text-center">
+                    <HelpCircle className="w-8 h-8 opacity-40 mb-1" />
+                    <span className="text-[10px] font-medium uppercase">Empty Stage</span>
+                  </div>
+                ) : (
+                  stageLeads.map((lead) => (
+                    <div
+                      key={lead.id}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, lead.id)}
+                      onDragEnd={handleDragEnd}
+                      className={`glass-card p-4 space-y-3 cursor-grab active:cursor-grabbing hover:border-slate-700/80 hover:bg-slate-900 transition-all ${
+                        draggedId === lead.id ? 'dragging' : ''
+                      }`}
+                    >
+                      {/* Company Name & Actions */}
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-2.5">
+                          <img
+                            src={lead.avatar}
+                            alt="Lead Logo"
+                            className="w-7 h-7 rounded-md border border-slate-800 bg-slate-950"
+                          />
+                          <div className="min-w-0">
+                            <h4 className="text-xs font-bold text-slate-200 truncate leading-snug">{lead.name}</h4>
+                            <p className="text-[10px] text-slate-500 truncate">{lead.company}</p>
+                          </div>
+                        </div>
