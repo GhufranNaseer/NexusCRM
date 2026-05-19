@@ -89,3 +89,63 @@ export default function CustomerProfile() {
                 }`}
               >
                 {customer.status}
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 font-semibold flex items-center gap-1.5 mt-1">
+              <Building className="w-3.5 h-3.5 text-slate-500" />
+              <span>{customer.company}</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Dynamic quick metrics */}
+        <div className="flex gap-6 border-t md:border-t-0 border-slate-800 pt-4 md:pt-0">
+          <div className="text-center md:text-right">
+            <span className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider block">Total Pipeline Value</span>
+            <span className="text-xl font-bold text-white mt-1 block">${customer.totalValue.toLocaleString()}</span>
+          </div>
+          <div className="text-center md:text-right">
+            <span className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider block">Closed Deals</span>
+            <span className="text-xl font-bold text-indigo-400 mt-1 block">{customer.dealsCount} Closed</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Custom Tabs Navigation */}
+      <div className="flex border-b border-slate-800 gap-6">
+        {['Overview', 'Deals', 'Notes', 'Activity'].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`pb-3 text-xs font-bold transition-all relative ${
+              activeTab === tab
+                ? 'text-indigo-400'
+                : 'text-slate-500 hover:text-slate-200'
+            }`}
+          >
+            {tab}
+            {activeTab === tab && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-indigo-500 rounded-full" />
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab Vewport */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Tab Left Pane (Grid columns dependent) */}
+        <div className="lg:col-span-2 space-y-6">
+          
+          {/* Tab: Overview */}
+          {activeTab === 'Overview' && (
+            <div className="space-y-6 animate-page-fade">
+              {/* Contact Information */}
+              <div className="glass-card p-5">
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4">Contact Information</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                  <div className="p-3 bg-slate-950/40 border border-slate-800/40 rounded-lg">
+                    <span className="text-slate-500 block font-semibold mb-1">Email Address</span>
+                    <span className="text-slate-200 flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5 text-slate-500" />
+                      {customer.email}
