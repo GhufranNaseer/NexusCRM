@@ -129,3 +129,53 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* KPI 2: Converted Clients */}
+        <div className="glass-card glass-card-hover glow-emerald p-5 flex flex-col relative overflow-hidden">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-medium text-slate-400">Converted Clients</span>
+            <div className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-emerald-400">
+              <Users className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-2xl font-bold text-white">{convertedCustomersCount}</span>
+            <span className="text-[10px] font-semibold text-emerald-400 flex items-center bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10">
+              +8%
+            </span>
+          </div>
+          <span className="text-[10px] text-slate-500 font-medium mb-3">Conversion Rate: {Math.round((convertedCustomersCount / (totalLeadsCount || 1)) * 100)}%</span>
+          <div className="h-10 w-full mt-auto">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={sparklineDataLeads}>
+                <Area type="monotone" dataKey="v" stroke="#10b981" strokeWidth={1.5} fill="rgba(16, 185, 129, 0.05)" dot={false} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* KPI 3: Active Deals */}
+        <div className="glass-card glass-card-hover glow-amber p-5 flex flex-col relative overflow-hidden">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-medium text-slate-400">Active Deals</span>
+            <div className="p-2 bg-amber-500/10 rounded-lg border border-amber-500/20 text-amber-400">
+              <Briefcase className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-2xl font-bold text-white">{activeDealsCount}</span>
+            <span className="text-[10px] font-semibold text-slate-400 flex items-center bg-slate-800 px-1.5 py-0.5 rounded border border-slate-700/50">
+              0% change
+            </span>
+          </div>
+          <span className="text-[10px] text-slate-500 font-medium mb-3">Valued at ${leads.filter(l => l.status !== 'Won' && l.status !== 'Lost').reduce((sum, l) => sum + l.value, 0).toLocaleString()}</span>
+          <div className="h-10 w-full mt-auto">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={sparklineDataLeads}>
+                <Area type="monotone" dataKey="v" stroke="#f59e0b" strokeWidth={1.5} fill="rgba(245, 158, 11, 0.05)" dot={false} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* KPI 4: Total Revenue */}
+        <div className="glass-card glass-card-hover glow-rose p-5 flex flex-col relative overflow-hidden">
