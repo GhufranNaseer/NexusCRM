@@ -201,3 +201,53 @@ export const initialTasks = [
   },
   {
     id: "task-2",
+    title: "Onboarding Call with Quantum Tech",
+    description: "Schedule zoom demo with Zainab and engineering team to map API workflows.",
+    priority: "High",
+    dueDate: "2026-05-25",
+    assigneeName: "Amna Malik",
+    assigneeAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Amna&backgroundColor=10b981",
+    status: "Pending"
+  },
+  {
+    id: "task-3",
+    title: "Review Awan Logistics Requirements",
+    description: "Analyze cold call feedback notes to finalize custom feature list estimations.",
+    priority: "Medium",
+    dueDate: "2026-05-26",
+    assigneeName: "Bilal Lodhi",
+    assigneeAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bilal&backgroundColor=f59e0b",
+    status: "Pending"
+  },
+  {
+    id: "task-4",
+    title: "Check-in on paused Shah Consulting account",
+    description: "Re-engage Mubeen regarding resumption timelines or alternative lighter packages.",
+    priority: "Low",
+    dueDate: "2026-06-01",
+    assigneeName: "Kamran Shah",
+    assigneeAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Kamran&backgroundColor=6366f1",
+    status: "Completed"
+  }
+];
+
+export const initialTeam = [
+  {
+    id: "t-1",
+    name: "Kamran Shah",
+    role: "Sales Manager",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Kamran&backgroundColor=6366f1",
+    leadsManaged: 8,
+    tasksCompleted: 14,
+    revenueGenerated: 45000,
+    performanceRate: 92
+  },
+  {
+    id: "t-2",
+    name: "Amna Malik",
+    role: "Admin / Owner",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Amna&backgroundColor=10b981",
+    leadsManaged: 12,
+    tasksCompleted: 24,
+    revenueGenerated: 85000,
+    performanceRate: 97
