@@ -41,3 +41,73 @@
     dateCreated: "2026-05-12",
     avatar: "https://api.dicebear.com/7.x/initials/svg?seed=QT&backgroundColor=10b981"
   },
+  {
+    id: "lead-4",
+    name: "Buraq Agency",
+    contactName: "Saad Khan",
+    email: "saad@buraq.agency",
+    phone: "+92 321 5556789",
+    company: "Buraq Creative Agency",
+    value: 5000,
+    status: "Negotiation",
+    source: "Social Media",
+    priority: "Low",
+    dateCreated: "2026-05-10",
+    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=BA&backgroundColor=f59e0b"
+  },
+  {
+    id: "lead-5",
+    name: "Indus Foods",
+    contactName: "Ayesha Bibi",
+    email: "ayesha@indusfoods.pk",
+    phone: "+92 301 4443322",
+    company: "Indus Food Products Ltd.",
+    value: 15500,
+    status: "Won",
+    source: "Website",
+    priority: "High",
+    dateCreated: "2026-05-05",
+    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=IF&backgroundColor=ef4444"
+  },
+  {
+    id: "lead-6",
+    name: "Apex Global",
+    contactName: "Tariq Mahmood",
+    email: "tariq@apexglobal.org",
+    phone: "+92 345 8887766",
+    company: "Apex Global Group",
+    value: 4000,
+    status: "Lost",
+    source: "Outreach",
+    priority: "Low",
+    dateCreated: "2026-04-28",
+    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=AG&backgroundColor=6b7280"
+  }
+];
+
+export const initialCustomers = [
+  {
+    id: "cust-1",
+    name: "Sara Khan",
+    email: "sara@example.com",
+    phone: "+92 300 9876543",
+    company: "Tech Solutions",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sara&backgroundColor=3b82f6",
+    status: "Active",
+    totalValue: 35000,
+    dealsCount: 3,
+    notes: [
+      { id: "n-1", content: "Highly satisfied client. Interested in scale-up package in Q3.", date: "2026-05-10 14:30" },
+      { id: "n-2", content: "Preferred communication channel: WhatsApp.", date: "2026-05-02 11:15" }
+    ]
+  },
+  {
+    id: "cust-2",
+    name: "Zeeshan Ahmed",
+    email: "zeeshan@ahmedcorp.com",
+    phone: "+92 315 1112223",
+    company: "Ahmed Corp",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Zeeshan&backgroundColor=10b981",
+    status: "Active",
+    totalValue: 18000,
+    dealsCount: 1,
