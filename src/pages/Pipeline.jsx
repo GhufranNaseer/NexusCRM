@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useCRMStore } from '../store/useCRMStore';
 import {
   Plus,
@@ -121,7 +121,7 @@ export default function Pipeline() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-xs font-bold text-white uppercase tracking-wider">{stage}</h3>
-                  <span className="text-[10px] text-slate-500 font-semibold">{stageLeads.length} leads â€¢ ${stageValue.toLocaleString()}</span>
+                  <span className="text-[10px] text-slate-500 font-semibold">{stageLeads.length} leads • ${stageValue.toLocaleString()}</span>
                 </div>
                 <div className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${styles.badge}`}>
                   {stageLeads.length}
@@ -209,3 +209,118 @@ export default function Pipeline() {
                         </span>
                       </div>
 
+                      {/* Contact metadata */}
+                      <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[9px] text-slate-500">
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-2.5 h-2.5" />
+                          <span>{lead.dateCreated}</span>
+                        </div>
+                        <span className="bg-slate-850 px-1.5 py-0.5 rounded text-[8px] font-bold text-slate-400 uppercase tracking-wide">
+                          {lead.source}
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Add Lead Slide-over / Modal Drawers */}
+      {showAddLead && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+          <div className="glass-card w-full max-w-md p-6 relative glow-indigo animate-page-fade">
+            <h3 className="text-lg font-bold text-white mb-2">Create New Lead</h3>
+            <p className="text-xs text-slate-400 mb-5">Fill in the company info to allocate lead space.</p>
+            
+            <form onSubmit={handleCreateLead} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 mb-1.5">Client / Contact Name</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Ali Enterprises / Zainab"
+                  value={newLeadName}
+                  onChange={(e) => setNewLeadName(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 mb-1.5">Company Name</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Ali Enterprises Ltd."
+                  value={newLeadCompany}
+                  onChange={(e) => setNewLeadCompany(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5">Deal Value ($)</label>
+                  <input
+                    type="number"
+                    required
+                    placeholder="e.g. 15000"
+                    value={newLeadVal}
+                    onChange={(e) => setNewLeadVal(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5">Priority</label>
+                  <select
+                    value={newLeadPriority}
+                    onChange={(e) => setNewLeadPriority(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                  >
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 mb-1.5">Lead Source</label>
+                <select
+                  value={newLeadSource}
+                  onChange={(e) => setNewLeadSource(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                >
+                  <option value="Website">Website</option>
+                  <option value="Email">Email</option>
+                  <option value="Referral">Referral</option>
+                  <option value="Social Media">Social Media</option>
+                  <option value="Outreach">Outreach</option>
+                </select>
+              </div>
+
+              <div className="flex gap-3 pt-3 justify-end text-xs">
+                <button
+                  type="button"
+                  onClick={() => setShowAddLead(false)}
+                  className="px-4 py-2 rounded-lg border border-slate-850 bg-transparent hover:bg-slate-900 text-slate-400"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold"
+                >
+                  Save Lead
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
