@@ -53,3 +53,23 @@
 }
 
 /* Pipeline Status Badges */
+.status-new-lead {
+  @apply bg-indigo-500/10 text-indigo-400 border border-indigo-500/20;
+}
+.status-contacted {
+  @apply bg-blue-500/10 text-blue-400 border border-blue-500/20;
+}
+.status-proposal {
+  @apply bg-amber-500/10 text-amber-400 border border-amber-500/20;
+}
+.status-negotiation {
+  @apply bg-purple-500/10 text-purple-400 border border-purple-500/20;
+}
+.status-won {
+  @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+}
+.status-lost {
+  @apply bg-rose-500/10 text-rose-400 border border-rose-500/20;
+}
+
+/* Custom CSS Transitions */
