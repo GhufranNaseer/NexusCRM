@@ -29,3 +29,33 @@ const STAGE_STYLES = {
 export default function Pipeline() {
   const leads = useCRMStore((state) => state.leads);
   const moveLead = useCRMStore((state) => state.moveLead);
+  const addLead = useCRMStore((state) => state.addLead);
+
+  const [draggedId, setDraggedId] = useState(null);
+  const [showAddLead, setShowAddLead] = useState(false);
+  const [newLeadName, setNewLeadName] = useState('');
+  const [newLeadCompany, setNewLeadCompany] = useState('');
+  const [newLeadVal, setNewLeadVal] = useState('');
+  const [newLeadPriority, setNewLeadPriority] = useState('Medium');
+  const [newLeadSource, setNewLeadSource] = useState('Website');
+  const [activeSelectCard, setActiveSelectCard] = useState(null);
+
+  // Drag and Drop handlers
+  const handleDragStart = (e, id) => {
+    e.dataTransfer.setData('text/plain', id);
+    setDraggedId(id);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedId(null);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e, targetStatus) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text/plain') || draggedId;
+    if (id) {
+      moveLead(id, targetStatus);
