@@ -129,3 +129,43 @@ export const useCRMStore = create((set, get) => ({
         return {
           ...c,
           notes: [
+            {
+              id: `note-${Date.now()}`,
+              content,
+              date: new Date().toISOString().replace('T', ' ').substring(0, 16)
+            },
+            ...c.notes
+          ]
+        };
+      }
+      return c;
+    });
+
+    const newActivity = {
+      id: `act-note-${Date.now()}`,
+      type: 'Note',
+      title: 'Note Added to Customer',
+      description: `Logged note: "${content.substring(0, 45)}${content.length > 45 ? '...' : ''}"`,
+      date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+      refName: customerName
+    };
+
+    return {
+      customers: updatedCustomers,
+      activities: [newActivity, ...state.activities]
+    };
+  }),
+
+  // Tasks Actions
+  addTask: (task) => set((state) => {
+    const newTask = {
+      id: `task-custom-${Date.now()}`,
+      status: 'Pending',
+      ...task
+    };
+    return {
+      tasks: [newTask, ...state.tasks]
+    };
+  }),
+
+  toggleTask: (taskId) => set((state) => {
