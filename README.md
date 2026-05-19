@@ -10,6 +10,12 @@ NexusCRM is a premium, high-fidelity Client Relationship Management (CRM) & SaaS
 
 Designed with custom dark theme glassmorphic visual guidelines (`.glass-card`), high-performance Recharts visual suites, and pixel-perfect smooth transition animations.
 
+
+
+<img width="1826" height="917" alt="image" src="https://github.com/user-attachments/assets/b38fe506-e012-463d-849e-bf84c0d05c6c" />
+
+
+
 ---
 
 ## ✨ Outstanding Core Features
