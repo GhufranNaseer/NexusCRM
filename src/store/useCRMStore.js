@@ -1,4 +1,4 @@
-﻿import { create } from 'zustand';
+import { create } from 'zustand';
 import {
   initialLeads,
   initialCustomers,
@@ -234,3 +234,51 @@ export const useCRMStore = create((set, get) => ({
 
         const replies = [
           "Aap ka response received ho gaya ha. I am sharing this with my technical director.",
+          "Awesome! Let me verify the timeline with our board and check-in tomorrow.",
+          "Jee perfect. Please send over the SLA drafts so we can finalise.",
+          "Shukriya! Could you also loop in Kamran on this thread for context?",
+          "Sure, that sounds fair. Let's arrange a quick 10-minute catch-up on this."
+        ];
+        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+        set((state) => {
+          const innerConversations = state.conversations.map((c) => {
+            if (c.id === conversationId) {
+              const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              return {
+                ...c,
+                lastMessage: randomReply,
+                unread: true,
+                chatHistory: [
+                  ...c.chatHistory,
+                  { sender: 'customer', text: randomReply, time: timestamp }
+                ]
+              };
+            }
+            return c;
+          });
+
+          // Log in timeline too
+          const newActivity = {
+            id: `act-msg-${Date.now()}`,
+            type: 'Email',
+            title: 'Customer Message Inbound',
+            description: `Received message from ${convo.name}: "${randomReply.substring(0, 40)}..."`,
+            date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+            refName: convo.name
+          };
+
+          return {
+            conversations: innerConversations,
+            activities: [newActivity, ...state.activities]
+          };
+        });
+      }, 1500);
+    }
+  },
+
+  // Settings / Theme Switcher
+  updateSettings: (newSettings) => set((state) => ({
+    settings: { ...state.settings, ...newSettings }
+  }))
+}));
