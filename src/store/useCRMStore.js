@@ -89,3 +89,43 @@ export const useCRMStore = create((set, get) => ({
             return c;
           });
         }
+      }
+
+      return {
+        leads: updatedLeads,
+        activities: [newActivity, ...state.activities],
+        customers: updatedCustomers
+      };
+    });
+  },
+
+  addLead: (lead) => set((state) => {
+    const newLead = {
+      id: `lead-custom-${Date.now()}`,
+      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${lead.name}&backgroundColor=4f46e5`,
+      dateCreated: new Date().toISOString().substring(0, 10),
+      ...lead
+    };
+    const newActivity = {
+      id: `act-auto-${Date.now()}`,
+      type: 'Note',
+      title: 'New Lead Created',
+      description: `Lead "${lead.name}" valued at $${lead.value} added via dashboard interface.`,
+      date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+      refName: lead.name
+    };
+    return {
+      leads: [newLead, ...state.leads],
+      activities: [newActivity, ...state.activities]
+    };
+  }),
+
+  // Customers Actions
+  addNote: (customerId, content) => set((state) => {
+    let customerName = 'Customer';
+    const updatedCustomers = state.customers.map((c) => {
+      if (c.id === customerId) {
+        customerName = c.name;
+        return {
+          ...c,
+          notes: [
