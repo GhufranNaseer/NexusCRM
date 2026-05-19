@@ -49,3 +49,33 @@ export default function Sidebar({ isOpen, onClose }) {
               <Compass className="w-5 h-5 text-white animate-spin-slow" />
             </div>
             <div>
+              <h1 className="text-lg font-bold text-white tracking-wide">NexusCRM</h1>
+              <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">SaaS Enterprise</span>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white lg:hidden"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Navigation Items */}
+        <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              onClick={() => {
+                if (window.innerWidth < 1024) onClose();
+              }}
+              className={({ isActive }) =>
+                `flex items-center gap-3.5 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  isActive
+                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20'
+                    : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                }`
+              }
+            >
+              <item.icon className="w-4.5 h-4.5" />
