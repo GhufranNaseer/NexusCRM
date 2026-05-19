@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useCRMStore } from '../store/useCRMStore';
 import { Send, Phone, Video, Search, MessageSquare, ShieldAlert, Sparkles } from 'lucide-react';
 
@@ -79,3 +79,131 @@ export default function Messaging() {
                     </div>
                     <p className="text-[10px] text-slate-450 font-medium truncate">{convo.company}</p>
                     <p className={`text-[11px] truncate mt-1 ${convo.unread ? 'text-white font-semibold' : 'text-slate-400'}`}>
+                      {convo.lastMessage}
+                    </p>
+                  </div>
+
+                  {/* Unread badge */}
+                  {convo.unread && (
+                    <span className="absolute right-4 bottom-4 w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right Panel: Active chat window */}
+        <div className="flex-1 flex flex-col bg-slate-950/20">
+          {activeChat ? (
+            <>
+              {/* Active Chat Header */}
+              <div className="px-6 py-3.5 border-b border-slate-800/80 bg-slate-900/20 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={activeChat.avatar}
+                    alt={activeChat.name}
+                    className="w-9 h-9 rounded-full border border-slate-850 bg-slate-900"
+                  />
+                  <div>
+                    <h3 className="text-xs font-bold text-white leading-snug">{activeChat.name}</h3>
+                    <span className="text-[9px] text-slate-500 font-semibold">{activeChat.company}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1 text-slate-400">
+                  <div className="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/15 flex items-center gap-1.5 mr-2">
+                    <Sparkles className="w-3 h-3 text-emerald-400" />
+                    <span>Real-time Chat Active</span>
+                  </div>
+                  <button className="p-2 rounded-lg hover:bg-slate-900/50 hover:text-white transition-colors">
+                    <Phone className="w-4 h-4" />
+                  </button>
+                  <button className="p-2 rounded-lg hover:bg-slate-900/50 hover:text-white transition-colors">
+                    <Video className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Chat Bubbles Viewport */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                {activeChat.chatHistory.map((msg, idx) => {
+                  const isUser = msg.sender === 'user';
+                  return (
+                    <div
+                      key={idx}
+                      className={`flex gap-3 text-xs animate-page-fade ${isUser ? 'justify-end' : 'justify-start'}`}
+                    >
+                      {/* Avatar for customer */}
+                      {!isUser && (
+                        <img
+                          src={activeChat.avatar}
+                          alt={activeChat.name}
+                          className="w-7 h-7 rounded-full border border-slate-850 bg-slate-900 flex-shrink-0 self-end mb-1"
+                        />
+                      )}
+
+                      {/* Bubble */}
+                      <div className="space-y-1">
+                        <div
+                          className={`p-3 max-w-sm rounded-xl leading-relaxed ${
+                            isUser
+                              ? 'bg-indigo-650 text-white rounded-br-none shadow shadow-indigo-600/10'
+                              : 'bg-slate-900/80 border border-slate-850 text-slate-200 rounded-bl-none'
+                          }`}
+                        >
+                          <p>{msg.text}</p>
+                        </div>
+                        <span className={`text-[9px] text-slate-500 block ${isUser ? 'text-right' : 'text-left'}`}>
+                          {msg.time}
+                        </span>
+                      </div>
+
+                      {/* Avatar for user */}
+                      {isUser && (
+                        <img
+                          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Amna&backgroundColor=10b981"
+                          alt="User"
+                          className="w-7 h-7 rounded-full border border-slate-850 bg-slate-900 flex-shrink-0 self-end mb-1"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+                <div ref={chatEndRef} />
+              </div>
+
+              {/* Message Input Form */}
+              <form
+                onSubmit={handleSendMessage}
+                className="p-4 border-t border-slate-800/80 bg-slate-950/30 flex gap-3"
+              >
+                <input
+                  type="text"
+                  required
+                  placeholder={`Send direct response to ${activeChat.name.split(' ')[0]}...`}
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  className="flex-1 bg-slate-950 border border-slate-850 rounded-lg px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 placeholder-slate-650"
+                />
+                <button
+                  type="submit"
+                  className="p-2.5 bg-indigo-650 hover:bg-indigo-600 rounded-lg text-white shadow shadow-indigo-600/10 flex items-center justify-center transition-colors"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </form>
+            </>
+          ) : (
+            <div className="flex-1 flex flex-col items-center justify-center text-slate-600 text-xs">
+              <MessageSquare className="w-10 h-10 opacity-30 mb-2" />
+              <span>Select a conversation to communicate</span>
+            </div>
+          )}
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
