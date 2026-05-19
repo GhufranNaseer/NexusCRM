@@ -1,0 +1,357 @@
+NexusCRM
+(Complete SRS + FRD + System Design + Build Plan)
+
+1. PROJECT OVERVIEW
+1.1 Project Name
+NexusCRM
+
+1.2 Type
+Modern CRM & Client Relationship Management Platform (SaaS)
+
+1.3 Purpose
+Ek high-end CRM system banana jo companies ko help kare:
+- Leads manage karne mein
+- Clients track karne mein
+- Sales pipeline control karne mein
+- Team coordination improve karne mein
+- Business analytics samajhne mein
+
+1.4 Target Users
+- Sales Manager
+- Admin / Owner
+- Support Team
+- Marketing Team
+
+2. PROBLEM STATEMENT
+Companies struggle with:
+- Scattered leads (Excel / WhatsApp / Email)
+- No proper pipeline tracking
+- Weak client history system
+- No centralized communication
+- Lack of performance analytics
+
+3. SOLUTION
+NexusCRM provides a unified CRM system:
+- Centralized lead management
+- Visual sales pipeline
+- Client history tracking
+- Task + activity system
+- Analytics dashboard
+- Messaging-style communication UI
+
+4. SYSTEM ARCHITECTURE
+4.1 Frontend
+- React (Vite)
+- Tailwind CSS
+- React Router DOM
+- Zustand / Context API
+4.2 Charts
+- Recharts
+4.3 Backend
+- Mock API (JSON) OR Node.js Express (optional)
+4.4 Data Flow
+User Action → UI Component → State Store → Mock API → UI Update → Analytics Refresh
+
+5. INFORMATION ARCHITECTURE
+Sidebar Modules:
+- Dashboard
+- Leads Pipeline
+- Customers
+- Activities
+- Tasks
+- Analytics
+- Messaging
+- Team
+- Settings
+
+6. FUNCTIONAL REQUIREMENTS (FRD)
+6.1 Dashboard Module
+Features:
+- Total Leads
+- Converted Clients
+- Active Deals
+- Revenue (mock KPI)
+- Pipeline overview
+- Activity summary
+UI:
+- KPI cards grid
+- Pipeline mini chart
+- Activity feed panel
+
+6.2 Leads Pipeline (CORE FEATURE)
+Features:
+- Kanban-style sales pipeline:
+  - New Lead
+  - Contacted
+  - Proposal Sent
+  - Negotiation
+  - Won / Lost
+- Drag & drop leads
+- Lead priority tagging
+- Lead source tracking (Website, Email, Referral)
+UI:
+- Horizontal Kanban board
+- Color-coded stages
+- Lead cards with quick actions
+
+6.3 Customer Profiles
+Features:
+- Customer details page:
+  - Name, email, phone
+  - Company
+  - Deal history
+  - Notes
+  - Interaction history
+  - Status tracking
+UI:
+- Profile header card
+- Tabs:
+  - Overview
+  - Deals
+  - Notes
+  - Activity
+
+6.4 Activity Tracking
+Features:
+- Log every action:
+  - Calls
+  - Meetings
+  - Emails
+  - Notes
+- Timeline view
+- Auto activity feed
+UI:
+- Vertical timeline
+- Icons for activity types
+
+6.5 Task Management
+Features:
+- Assign tasks to team members
+- Task deadlines
+- Priority levels
+- Task status tracking
+UI:
+- Table or card view
+- Status badges
+
+6.6 Messaging Module (CRM Chat UI)
+Features:
+- Chat-like UI
+- Customer communication history
+- Internal team chat (mock UI)
+UI:
+- Left: conversation list
+- Right: chat window
+- WhatsApp-style layout
+
+6.7 Analytics Module
+Features:
+- Lead conversion rate
+- Sales funnel chart
+- Revenue trend
+- Team performance
+UI:
+- Funnel charts
+- Bar + line charts
+- KPI insights
+
+6.8 Team Dashboard
+Features:
+- Team members list
+- Performance stats
+- Assigned leads/tasks
+- Role-based access
+
+6.9 Settings
+- Profile settings
+- Theme (dark/light)
+- Role permissions (UI only)
+
+7. NON-FUNCTIONAL REQUIREMENTS
+- Fully responsive SaaS UI
+- Fast performance
+- Clean component architecture
+- Scalable system design
+- Professional CRM look
+- Smooth transitions
+
+8. UI DESIGN SYSTEM
+Style:
+- SaaS CRM style
+- Clean enterprise UI
+- Dark mode default
+- Card-based design
+Colors:
+- Primary: Blue / Indigo
+- Success: Green
+- Warning: Yellow
+- Danger: Red
+- Background: Dark slate
+Typography:
+- Font: Inter
+- Clean hierarchy
+
+9. COMPONENT ARCHITECTURE
+Reusable Components:
+- Sidebar
+- Navbar
+- KPI Card
+- LeadCard
+- PipelineColumn
+- CustomerCard
+- TimelineItem
+- ChatBubble
+- TableComponent
+- Modal
+- Badge
+
+10. PAGE STRUCTURE
+- Dashboard
+- Leads Pipeline
+- Customers
+- Activities
+- Tasks
+- Analytics
+- Messaging
+- Team
+- Settings
+
+11. DEVELOPMENT FLOW
+PHASE 1 — Setup
+- Vite React setup
+- Tailwind install
+- Folder structure
+PHASE 2 — Layout System
+- Sidebar navigation
+- Top navbar
+- Routing setup
+PHASE 3 — Dashboard
+- KPI cards
+- Overview charts
+PHASE 4 — Core CRM Engine
+- Leads pipeline Kanban
+- Drag & drop logic
+PHASE 5 — Customer System
+- Profile pages
+- Notes + history
+PHASE 6 — Activities + Tasks
+- Timeline system
+- Task management UI
+PHASE 7 — Messaging UI
+- Chat system layout
+- Conversation list
+PHASE 8 — Analytics
+- Funnel + charts
+- Performance metrics
+PHASE 9 — Polish
+- Dark mode
+- Responsive fixes
+
+12. MOCK DATA STRUCTURE
+Lead:
+{
+  "id": 1,
+  "name": "Ali Enterprises",
+  "status": "New Lead",
+  "source": "Website",
+  "value": 5000
+}
+Customer:
+{
+  "id": 1,
+  "name": "Sara Khan",
+  "email": "sara@example.com",
+  "company": "Tech Solutions"
+}
+Activity:
+{
+  "id": 1,
+  "type": "Call",
+  "description": "Follow-up call completed",
+  "date": "2026-05-20"
+}
+
+13. CORE CRM LOGIC
+- Lead moves through pipeline stages
+- Every stage change updates analytics
+- Activities automatically logged
+- Customer profile aggregates all data
+
+14. EXPECTED OUTPUT
+- Fully functional CRM UI
+- SaaS-level dashboard
+- Portfolio-ready project
+- Strong Upwork impression
+
+🤖 CLAUDE PROMPT — NexusCRM
+You are a senior SaaS CRM architect and React developer.
+Build a complete production-level CRM system called:
+"NexusCRM — Modern CRM & Client Management Platform"
+
+---
+### CORE REQUIREMENTS
+- React (Vite)
+- Tailwind CSS
+- React Router DOM
+- Recharts for analytics
+- Zustand or Context API for state
+- Mock JSON data only (no real backend required)
+
+---
+### MUST BUILD FEATURES
+1. Dashboard with KPI + charts
+2. Leads Pipeline (Kanban drag & drop system)
+3. Customer Profiles (detailed pages)
+4. Activity Timeline system
+5. Task management module
+6. Messaging UI (chat-style CRM interface)
+7. Analytics dashboard (sales funnel, revenue charts)
+8. Team management UI
+9. Settings page (theme + roles UI only)
+
+---
+### UI REQUIREMENTS
+- Modern SaaS CRM design
+- Dark mode default
+- Sidebar + Navbar layout
+- Card-based UI system
+- Clean spacing system (8px grid)
+- Professional enterprise CRM feel
+- Fully responsive
+
+---
+### ARCHITECTURE RULES
+- Component-based architecture
+- Reusable components required
+- Clean folder structure:
+  /components
+  /pages
+  /layouts
+  /data
+  /hooks
+- Use mock JSON data for everything
+
+---
+### DEVELOPMENT FLOW (STRICT ORDER)
+1. Project setup (Vite + Tailwind)
+2. Layout system (Sidebar + Navbar)
+3. Dashboard page
+4. Leads Pipeline system (MOST IMPORTANT)
+5. Customer profiles
+6. Activity tracking system
+7. Task management
+8. Messaging UI
+9. Analytics dashboard
+10. Final polish + responsiveness
+
+---
+### OUTPUT REQUIREMENTS
+- Full project structure
+- Step-by-step code generation
+- No skipping modules
+- Production-level SaaS UI
+- Clean reusable components
+
+---
+### FINAL GOAL
+A fully working CRM SaaS dashboard that looks like a real startup product and can impress enterprise clients.
