@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCRMStore } from '../store/useCRMStore';
 import { Menu, Sun, Moon, Bell, Shield, User } from 'lucide-react';
 
@@ -89,3 +89,53 @@ export default function Navbar({ onOpenSidebar }) {
           className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors"
           title="Toggle Light/Dark Theme"
         >
+          {settings.theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
+        </button>
+
+        {/* Notification Bell */}
+        <div className="relative">
+          <button
+            onClick={() => setShowNotifications(!showNotifications)}
+            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors relative"
+          >
+            <Bell className="w-4 h-4" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
+          </button>
+
+          {showNotifications && (
+            <>
+              <div className="fixed inset-0 z-10" onClick={() => setShowNotifications(false)} />
+              <div className="absolute right-0 mt-2 w-80 bg-slate-900 border border-slate-800 rounded-lg shadow-2xl overflow-hidden z-20">
+                <div className="px-4 py-3 bg-slate-950/60 border-b border-slate-800/80 flex items-center justify-between">
+                  <h3 className="text-xs font-semibold text-white">Recent Activities</h3>
+                  <span className="text-[10px] text-indigo-400 font-semibold cursor-pointer">Mark all read</span>
+                </div>
+                <div className="divide-y divide-slate-800 max-h-64 overflow-y-auto">
+                  {recentNotifications.map((notif) => (
+                    <div key={notif.id} className="p-3 hover:bg-slate-800/40 text-xs">
+                      <div className="flex justify-between items-start mb-0.5">
+                        <span className="font-semibold text-slate-200 truncate pr-2">{notif.title}</span>
+                        <span className="text-[9px] text-slate-500 whitespace-nowrap">{notif.date.split(' ')[1] || 'Just now'}</span>
+                      </div>
+                      <p className="text-slate-400 leading-snug line-clamp-2">{notif.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Small User Info (Divider) */}
+        <div className="w-[1px] h-6 bg-slate-800 hidden sm:block" />
+        <div className="hidden sm:flex items-center gap-2">
+          <div className="text-right">
+            <h4 className="text-xs font-semibold text-white">{settings.userName}</h4>
+            <span className="text-[10px] text-slate-500 font-medium">Active Session</span>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  );
+}
