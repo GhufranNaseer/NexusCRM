@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -79,3 +79,26 @@ export default function Sidebar({ isOpen, onClose }) {
               }
             >
               <item.icon className="w-4.5 h-4.5" />
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Sidebar Footer */}
+        <div className="p-4 border-t border-slate-800/80">
+          <div className="flex items-center gap-3 p-2.5 rounded-lg bg-slate-950/40 border border-slate-800/40">
+            <img
+              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Amna&backgroundColor=10b981"
+              alt="User Avatar"
+              className="w-9 h-9 rounded-full bg-slate-800 border border-slate-700/50"
+            />
+            <div className="flex-1 min-w-0">
+              <h4 className="text-xs font-semibold text-white truncate">Amna Malik</h4>
+              <p className="text-[10px] text-slate-500 truncate">amna@nexus.crm</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </>
+  );
+}
