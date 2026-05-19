@@ -149,3 +149,63 @@ export default function CustomerProfile() {
                     <span className="text-slate-200 flex items-center gap-1.5">
                       <Mail className="w-3.5 h-3.5 text-slate-500" />
                       {customer.email}
+                    </span>
+                  </div>
+                  <div className="p-3 bg-slate-950/40 border border-slate-800/40 rounded-lg">
+                    <span className="text-slate-500 block font-semibold mb-1">Phone Number</span>
+                    <span className="text-slate-200 flex items-center gap-1.5">
+                      <Phone className="w-3.5 h-3.5 text-slate-500" />
+                      {customer.phone}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Deal Status Card */}
+              <div className="glass-card p-5">
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4">Core Partnership Overview</h3>
+                <div className="p-4 bg-slate-950/40 border border-slate-800/40 rounded-lg flex items-center justify-between text-xs">
+                  <div className="space-y-1">
+                    <span className="text-slate-500 font-semibold uppercase text-[9px] block">Partnership Health</span>
+                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                      <TrendingUp className="w-4 h-4" />
+                      Stable & Retained
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 leading-relaxed max-w-sm text-right">
+                    Customer logs indicate clean onboarding. Total generated value sits at ${customer.totalValue.toLocaleString()} across {customer.dealsCount} sales channels.
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: Deals */}
+          {activeTab === 'Deals' && (
+            <div className="glass-card p-5 space-y-4 animate-page-fade">
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-2">Historical Deals Ledger</h3>
+              <div className="space-y-3 text-xs">
+                {Array.from({ length: customer.dealsCount }).map((_, idx) => (
+                  <div key={idx} className="p-3.5 bg-slate-950/40 border border-slate-850 rounded-lg flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-indigo-500/10 text-indigo-400 border border-indigo-500/10 rounded-lg">
+                        <Briefcase className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-200">SaaS License Provisioning (Contract #{1000 + idx})</h4>
+                        <span className="text-[10px] text-slate-500">Completed deal allocation</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <span className="font-bold text-white">${(customer.totalValue / customer.dealsCount).toLocaleString()}</span>
+                      <span className="text-[9px] block text-emerald-400 font-semibold mt-0.5">Success Won</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Tab: Notes */}
+          {activeTab === 'Notes' && (
+            <div className="space-y-6 animate-page-fade">
