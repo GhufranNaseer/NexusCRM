@@ -169,3 +169,68 @@ export const useCRMStore = create((set, get) => ({
   }),
 
   toggleTask: (taskId) => set((state) => {
+    let completedTask = null;
+    const updatedTasks = state.tasks.map((t) => {
+      if (t.id === taskId) {
+        completedTask = { ...t, status: t.status === 'Completed' ? 'Pending' : 'Completed' };
+        return completedTask;
+      }
+      return t;
+    });
+
+    let newActivities = [...state.activities];
+    if (completedTask && completedTask.status === 'Completed') {
+      newActivities = [
+        {
+          id: `act-task-${Date.now()}`,
+          type: 'Meeting',
+          title: 'Task Completed',
+          description: `Representative marked task "${completedTask.title}" as done.`,
+          date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+          refName: completedTask.assigneeName
+        },
+        ...state.activities
+      ];
+    }
+
+    return {
+      tasks: updatedTasks,
+      activities: newActivities
+    };
+  }),
+
+  deleteTask: (taskId) => set((state) => ({
+    tasks: state.tasks.filter((t) => t.id !== taskId)
+  })),
+
+  // Messaging Actions
+  sendMessage: (conversationId, text, sender = 'user') => {
+    set((state) => {
+      const updatedConversations = state.conversations.map((c) => {
+        if (c.id === conversationId) {
+          const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          return {
+            ...c,
+            lastMessage: text,
+            unread: sender === 'customer',
+            chatHistory: [
+              ...c.chatHistory,
+              { sender, text, time: timestamp }
+            ]
+          };
+        }
+        return c;
+      });
+
+      return { conversations: updatedConversations };
+    });
+
+    // Simulated Response
+    if (sender === 'user') {
+      setTimeout(() => {
+        const store = get();
+        const convo = store.conversations.find((c) => c.id === conversationId);
+        if (!convo) return;
+
+        const replies = [
+          "Aap ka response received ho gaya ha. I am sharing this with my technical director.",
