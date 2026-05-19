@@ -1,4 +1,4 @@
-﻿export const initialLeads = [
+export const initialLeads = [
   {
     id: "lead-1",
     name: "Ali Enterprises",
@@ -251,3 +251,67 @@ export const initialTeam = [
     tasksCompleted: 24,
     revenueGenerated: 85000,
     performanceRate: 97
+  },
+  {
+    id: "t-3",
+    name: "Bilal Lodhi",
+    role: "Support Team",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bilal&backgroundColor=f59e0b",
+    leadsManaged: 4,
+    tasksCompleted: 18,
+    revenueGenerated: 12000,
+    performanceRate: 88
+  },
+  {
+    id: "t-4",
+    name: "Sana Butt",
+    role: "Marketing Team",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sana&backgroundColor=ec4899",
+    leadsManaged: 15,
+    tasksCompleted: 9,
+    revenueGenerated: 32000,
+    performanceRate: 90
+  }
+];
+
+export const initialConversations = [
+  {
+    id: "chat-1",
+    name: "Sara Khan",
+    company: "Tech Solutions",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sara&backgroundColor=3b82f6",
+    unread: true,
+    lastMessage: "Looking forward to our scheduled sync session tomorrow morning!",
+    chatHistory: [
+      { sender: "customer", text: "Assalam-o-Alaikum, I've checked the standard CRM onboarding guidelines.", time: "10:00 AM" },
+      { sender: "user", text: "Walaikum Assalam Sara! Fantastic. Let me know if you face any issues during config.", time: "10:12 AM" },
+      { sender: "customer", text: "Looking forward to our scheduled sync session tomorrow morning!", time: "10:15 AM" }
+    ]
+  },
+  {
+    id: "chat-2",
+    name: "Ali Raza",
+    company: "Ali Enterprises",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ali&backgroundColor=4f46e5",
+    unread: false,
+    lastMessage: "Thanks, I will review the commercial proposal and get back.",
+    chatHistory: [
+      { sender: "customer", text: "Hello, could you please send the detailed licensing fee breakdown?", time: "Yesterday" },
+      { sender: "user", text: "Absolutely, Ali. I have sent the document directly to your registered email.", time: "Yesterday" },
+      { sender: "customer", text: "Thanks, I will review the commercial proposal and get back.", time: "Yesterday" }
+    ]
+  },
+  {
+    id: "chat-3",
+    name: "Kamran Shah (Team)",
+    company: "Sales Desk Internal",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Kamran&backgroundColor=6366f1",
+    unread: false,
+    lastMessage: "Completed the outreach spreadsheet review. Ali Raza is warm.",
+    chatHistory: [
+      { sender: "customer", text: "Are we on track with the Ali Enterprises pitch draft?", time: "May 18" },
+      { sender: "user", text: "Yes, Kamran. The high priority task is assigned to you and due on May 22nd.", time: "May 18" },
+      { sender: "customer", text: "Completed the outreach spreadsheet review. Ali Raza is warm.", time: "May 18" }
+    ]
+  }
+];
