@@ -64,3 +64,53 @@ export default function Customers() {
 
       </div>
 
+      {/* Customers Table List */}
+      <div className="glass-card overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-slate-800 bg-slate-900/40 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4">Client Detail</th>
+                <th className="px-6 py-4">Company</th>
+                <th className="px-6 py-4">Lifetime Value</th>
+                <th className="px-6 py-4">Deals Closed</th>
+                <th className="px-6 py-4">Status</th>
+                <th className="px-6 py-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800 text-xs">
+              {filteredCustomers.length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="text-center py-10 text-slate-500 font-medium">
+                    No customers found matching the search filters.
+                  </td>
+                </tr>
+              ) : (
+                filteredCustomers.map((cust) => (
+                  <tr
+                    key={cust.id}
+                    onClick={() => navigate(`/customers/${cust.id}`)}
+                    className="hover:bg-slate-900/40 cursor-pointer transition-colors"
+                  >
+                    {/* Client Detail */}
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={cust.avatar}
+                          alt={cust.name}
+                          className="w-9 h-9 rounded-full bg-slate-800 border border-slate-700/50"
+                        />
+                        <div>
+                          <h4 className="font-bold text-slate-200">{cust.name}</h4>
+                          <span className="text-[10px] text-slate-500">{cust.email}</span>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* Company */}
+                    <td className="px-6 py-4">
+                      <div className="flex flex-col">
+                        <span className="font-semibold text-slate-350">{cust.company}</span>
+                        <span className="text-[10px] text-slate-500">{cust.phone}</span>
+                      </div>
+                    </td>
