@@ -17,3 +17,15 @@
 ::-webkit-scrollbar-track {
   @apply bg-slate-950/40;
 }
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+}
+
+/* Premium UI Utilities */
+.glass-card {
+  @apply bg-slate-900/60 backdrop-blur-md border border-slate-800/80 shadow-xl rounded-xl transition-all duration-300;
+}
+
+.glass-card-hover {
+  @apply hover:border-slate-700/80 hover:bg-slate-900/80 hover:shadow-indigo-500/5 hover:translate-y-[-2px];
