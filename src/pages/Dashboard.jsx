@@ -179,3 +179,43 @@ export default function Dashboard() {
 
         {/* KPI 4: Total Revenue */}
         <div className="glass-card glass-card-hover glow-rose p-5 flex flex-col relative overflow-hidden">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-medium text-slate-400">Total Revenue</span>
+            <div className="p-2 bg-rose-500/10 rounded-lg border border-rose-500/20 text-rose-400">
+              <DollarSign className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-2xl font-bold text-white">${totalRevenueVal.toLocaleString()}</span>
+            <span className="text-[10px] font-semibold text-emerald-400 flex items-center bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10">
+              +18.5%
+            </span>
+          </div>
+          <span className="text-[10px] text-slate-500 font-medium mb-3">Accumulated SaaS billing</span>
+          <div className="h-10 w-full mt-auto">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={sparklineDataRevenue}>
+                <Area type="monotone" dataKey="v" stroke="#f43f5e" strokeWidth={1.5} fill="rgba(244, 63, 94, 0.05)" dot={false} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Visual Analytics Split Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Main Funnel Chart Widget */}
+        <div className="glass-card p-5 lg:col-span-2 flex flex-col">
+          <div className="mb-4">
+            <h3 className="text-sm font-bold text-white">Pipeline Conversion Funnel</h3>
+            <p className="text-slate-500 text-[11px] mt-0.5">Summary of leads grouped by their current statuses.</p>
+          </div>
+          
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={pipelineChartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <XAxis dataKey="name" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} />
+                <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} />
+                <Tooltip
