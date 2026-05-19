@@ -59,3 +59,43 @@ export default function Pipeline() {
     const id = e.dataTransfer.getData('text/plain') || draggedId;
     if (id) {
       moveLead(id, targetStatus);
+    }
+    setDraggedId(null);
+  };
+
+  const handleCreateLead = (e) => {
+    e.preventDefault();
+    if (!newLeadName || !newLeadCompany || !newLeadVal) return;
+
+    addLead({
+      name: newLeadName,
+      company: newLeadCompany,
+      contactName: newLeadName.split(' ')[0] || 'Contact',
+      email: `${newLeadName.toLowerCase().replace(/ /g, '')}@${newLeadCompany.toLowerCase().replace(/ /g, '')}.com`,
+      phone: '+92 300 0000000',
+      value: parseFloat(newLeadVal) || 5000,
+      priority: newLeadPriority,
+      source: newLeadSource,
+      status: 'New Lead'
+    });
+
+    setNewLeadName('');
+    setNewLeadCompany('');
+    setNewLeadVal('');
+    setShowAddLead(false);
+  };
+
+  return (
+    <div className="space-y-6">
+      
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-white">Leads Pipeline</h2>
+          <p className="text-slate-400 text-xs mt-0.5">Drag-and-drop lead cards between stages to update status, track revenue conversions, and trigger logs.</p>
+        </div>
+        <button
+          onClick={() => setShowAddLead(true)}
+          className="flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 shadow-md shadow-indigo-600/20 text-white transition-all self-start sm:self-auto"
+        >
+          <Plus className="w-4 h-4" />
