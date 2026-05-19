@@ -111,3 +111,43 @@ export const initialCustomers = [
     status: "Active",
     totalValue: 18000,
     dealsCount: 1,
+    notes: [
+      { id: "n-3", content: "Demanded extra features for report export. Sent request to support.", date: "2026-05-14 09:00" }
+    ]
+  },
+  {
+    id: "cust-3",
+    name: "Dr. Fatima Jamil",
+    email: "fatima@jamilclinics.com",
+    phone: "+92 334 7778889",
+    company: "Jamil Medical Complex",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima&backgroundColor=f59e0b",
+    status: "Active",
+    totalValue: 50000,
+    dealsCount: 4,
+    notes: [
+      { id: "n-4", content: "Renewal of contract due on June 15th.", date: "2026-05-18 16:45" }
+    ]
+  },
+  {
+    id: "cust-4",
+    name: "Mubeen Shah",
+    email: "mubeen@shahconsulting.pk",
+    phone: "+92 320 6667778",
+    company: "Shah Consulting",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mubeen&backgroundColor=ec4899",
+    status: "Inactive",
+    totalValue: 7500,
+    dealsCount: 1,
+    notes: [
+      { id: "n-5", content: "Paused operations temporarily. Keep in contact.", date: "2026-04-10 12:00" }
+    ]
+  }
+];
+
+export const initialActivities = [
+  {
+    id: "act-1",
+    type: "Call",
+    title: "Introductory Phone Call",
+    description: "Successfully introduced NexusCRM capabilities to Zainab Malik from Quantum Tech.",
