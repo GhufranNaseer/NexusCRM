@@ -1,0 +1,43 @@
+﻿export const initialLeads = [
+  {
+    id: "lead-1",
+    name: "Ali Enterprises",
+    contactName: "Ali Raza",
+    email: "ali@alienterprises.com",
+    phone: "+92 300 1234567",
+    company: "Ali Enterprises Ltd.",
+    value: 12000,
+    status: "New Lead",
+    source: "Website",
+    priority: "High",
+    dateCreated: "2026-05-18",
+    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=AE&backgroundColor=4f46e5"
+  },
+  {
+    id: "lead-2",
+    name: "Awan Logistics",
+    contactName: "Kamran Awan",
+    email: "kamran@awanlogistics.com",
+    phone: "+92 312 9876543",
+    company: "Awan & Co.",
+    value: 8500,
+    status: "Contacted",
+    source: "Referral",
+    priority: "Medium",
+    dateCreated: "2026-05-15",
+    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=AL&backgroundColor=0ea5e9"
+  },
+  {
+    id: "lead-3",
+    name: "Quantum Tech",
+    contactName: "Zainab Malik",
+    email: "zainab@quantumtech.io",
+    phone: "+92 333 4567890",
+    company: "Quantum Tech Solutions",
+    value: 24500,
+    status: "Proposal Sent",
+    source: "Email",
+    priority: "High",
+    dateCreated: "2026-05-12",
+    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=QT&backgroundColor=10b981"
+  },
