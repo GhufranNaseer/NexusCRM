@@ -47,3 +47,9 @@
   box-shadow: 0 0 20px -2px rgba(244, 63, 94, 0.15);
 }
 
+/* Custom Dragging Overlay */
+.dragging {
+  @apply opacity-40 scale-95 border-indigo-500/50 shadow-indigo-500/10 cursor-grabbing;
+}
+
+/* Pipeline Status Badges */
